@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +16,28 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.dashboard');
 });
+
+Route::get('/dashboard', function () {
+    return view('layouts.dashboard');
+});
+
+// Route::get('/users', function(){
+//     $users = DB::table('users')->get();
+//     return view('user.userlist', ['users'=> $users]);
+// });
+Route::resource('user', UserController::class);
+Route::resource('profiles', ProfileController::class);
+
+Route::get('/checkfail', function (){
+    echo "checkfail page";
+    //return view('layouts.dashboard');
+});
+Route::get('checkage/{age?}', function ($age) {
+    echo $age;
+    //return view('layouts.dashboard');
+})->middleware(\App\Http\Middleware\CheckAge::class);
+
+
+
