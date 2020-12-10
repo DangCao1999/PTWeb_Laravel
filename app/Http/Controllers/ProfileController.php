@@ -47,7 +47,7 @@ class ProfileController extends Controller
     public function show($id)
     {
         $profile =  DB::table('profiles')->find($id);
-        return view('profile.show', ['profile'=>$profile]);
+        return View('profile.index', ['profile' => $profile]);
     }
 
     /**
@@ -58,7 +58,8 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        //
+        $profile =  DB::table('profiles')->where('user_id',$id)->first();
+		return View('profile.edit',['profile'=>$profile]);
     }
 
     /**

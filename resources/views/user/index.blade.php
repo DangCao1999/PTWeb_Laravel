@@ -19,7 +19,7 @@
 				<div class="card">
 
 				  <div class="card-header">
-					<h4 class="card-title"> Simple Table</h4>
+					<h4 class="card-title">Simple Table</h4>
 				  </div>
 				  <div style="padding: 0 20px">
 					<a class="btn btn-primary btn-block" style="font-size: 24px" href="/user/create" >Create User</a>
@@ -60,11 +60,8 @@
 									  <input type="password" name="" id="input-{{$user->id}}" value="{{$user->password}}">
 									  </td>
 									  <td>
-										  <a href="/profile/create">Create Profile</a>
+                                      <a href="/profile/{{$user->id}}">View Profile</a>
 									  </td>
-									  <td>
-										  <button>View Profile</button>
-                                      </td>
                                       <td>
                                         <button>Delete User</button>
                                     </td>

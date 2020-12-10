@@ -23,12 +23,17 @@ Route::get('/dashboard', function () {
     return view('layouts.dashboard');
 });
 
+// Route::get('profile/create/{id}', function($id){
+//     echo $id;
+//     return view('profile.createprofile');
+// });
 // Route::get('/users', function(){
 //     $users = DB::table('users')->get();
 //     return view('user.userlist', ['users'=> $users]);
 // });
 Route::resource('user', UserController::class);
-Route::resource('profiles', ProfileController::class);
+
+Route::resource('profile', ProfileController::class);
 
 Route::get('/checkfail', function (){
     echo "checkfail page";
