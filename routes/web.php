@@ -33,7 +33,7 @@ Route::get('/dashboard', function () {
 // });
 Route::resource('user', UserController::class);
 
-Route::resource('profile', ProfileController::class);
+Route::resource('profisle', ProfileController::class);
 
 Route::get('/checkfail', function (){
     echo "checkfail page";

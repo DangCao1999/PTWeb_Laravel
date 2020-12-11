@@ -9,11 +9,11 @@
         @include('includes.sidebar')
       </div>
       <div class="main-panel" id="main-panel">
-       
+
         @yield('content')
         @include('includes.footer')
       </div>
   @include('includes.script')
-  
+  @yield('js')
 </body>
 </html>

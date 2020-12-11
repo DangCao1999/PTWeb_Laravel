@@ -2,13 +2,11 @@
 @section('content')
 @include('user.navuser')
 <div class="content">
-
-
     <div class="row">
         <div class="col-md-8">
           <div class="card">
             <div class="card-header">
-              <h5 class="title">Profile</h5>
+              <h5 class="title">Show Profile</h5>
             </div>
             <div class="card-body">
               <form>
@@ -69,6 +67,7 @@
                   </div>
 
                 </div>
+
 
               </form>
             </div>
