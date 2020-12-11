@@ -95,7 +95,9 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+        dd("aaa");
         DB::table('users')->where('id', $id)->delete();
-        return redirect('/users');
+        DB::table('profiles')->where('user_id', $id)->delete();
+        return redirect('/user');
     }
 }

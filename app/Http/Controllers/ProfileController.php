@@ -26,6 +26,7 @@ class ProfileController extends Controller
     public function create()
     {
         //
+        return View('profile.createprofile');
     }
 
     /**
@@ -36,21 +37,23 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-
+        // dd($request);
         $profile = new Profile();
         $profile->address = $request->input('address');
         $profile->phone = $request->input('phone');
         $profile ->birthday = $request->input('birthday');
-
-        $profile->userId = $request->input('userId');
-        $validate = $request->validate(['avatar' => 'nullable|mimes:jpg, jpeg, png, xlx,xls, pdf|max::2048']);
-        // print($user->name);
+        $profile->user_id = $request->input('id');
+        // $profile->user_id = $request->input('userId');
+        // dd($request->input('id'));
+        //$validate = $request->validate(['avatar' => 'nullable|mimes:jpg, jpeg, png, xlx,xls, pdf|max::2048']);
+        //print($user->name);
         $filename = $request->file('avatar')->getClientOriginalName();
+        //dd($filename);
         $filepath = $request->file('avatar')->storeAs('uploads',$filename, 'public');
-        dd($filepath);
+        //dd($filepath);
         $profile->avatar = '/storage/' . $filepath;
         DB::table('profiles')->insert([
-            'user_id'=> $profile->userId,
+            'user_id' => $profile->user_id,
             'address' => $profile->address,
             'avatar' => $profile->avatar,
             'birthday' => $profile->birthday,

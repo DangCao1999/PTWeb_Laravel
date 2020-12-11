@@ -63,7 +63,10 @@
                                       <a href="/profile/{{$user->id}}">View Profile</a>
 									  </td>
                                       <td>
-                                        <button>Delete User</button>
+                                      <form action="/user/{{$user->id}}" method="POST">
+                                            @method('delete')
+                                            <button type="submit">Delete User</button>
+                                        </form>
                                     </td>
 									  <td>
 									  <button id="{{$user->id}}"onclick="viewClick(this)">view</button>

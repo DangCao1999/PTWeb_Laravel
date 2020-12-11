@@ -14,22 +14,23 @@
         <div class="col-md-8">
 
             <div class="card">
-              <form action="">
+
             <div class="card-header">
               <h5 class="title">Create Profile</h5>
             </div>
             <div class="card-body">
-            <form action="{{ route('profile.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('profile.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
-
+            <input type="hidden" name="id" value="{{$id}}">
                 <div class="row">
                   <div class="col-md-5 pr-1">
                     <div class="form-group">
                       <label>User ID (disabled)</label>
-                      <input type="text" class="form-control" name="userId" disabled="" placeholder="Your User ID" value={{($id)}} >
+                      <input type="text" class="form-control" name="userId" disabled="" placeholder="Your User ID" value={{($id)}}>
                     </div>
                   </div>
+
                 </div>
                 <div class="row">
                   <div class="col-md-12">
@@ -53,7 +54,7 @@
                     </div>
                   </div>
                 </div>
-                {{-- <div class="row">
+                <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
                           <div class="form-control">
@@ -63,7 +64,7 @@
                           </div>
                       </div>
                     </div>
-                  </div> --}}
+                  </div>
                 <button class="btn btn-primary btn-block" type="submit">Create</button>
               </form>
             </div>
