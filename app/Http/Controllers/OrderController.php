@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Facade\FlareClient\View;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class UserController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = DB::table('users')->get();
-        return View('user.index',['users'=>$users]);
+        //
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -25,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return View('user.createuser');
+        //
     }
 
     /**
@@ -36,20 +36,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
-        $user = DB::table('users');
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->password = $request->input('password');
-        // print($user->name);
-        $affected = DB::table('users')->insert(
-            [
-                "name" => $user->name,
-                "email" => $user->email,
-                "password" => $user->password,
-            ]
-        );
-        return redirect('/user');
+        //
     }
 
     /**
@@ -95,9 +82,5 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-        //dd("aaa");
-        DB::table('users')->where('id', $id)->delete();
-        DB::table('profiles')->where('user_id', $id)->delete();
-        return redirect('/user');
     }
 }

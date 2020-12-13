@@ -37,7 +37,10 @@
                   </div>
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary btn-block" style="font-size: 24px" >Create User</button>
+              <div style="display: flex; justify-content: flex-end;">
+                <button type="submit" class="btn btn-primary btn-fill" style="font-size: 15px" >Create User</button>
+              </div>
+              
         </form>
       </div>
       

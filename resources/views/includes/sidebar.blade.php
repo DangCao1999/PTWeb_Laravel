@@ -11,9 +11,15 @@
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
           <li>
-            <a href="/dashboard">
+            <a href="/product">
               <i class="now-ui-icons design_app"></i>
-              <p>Dashboard</p>
+              <p>Product</p>
+            </a>
+          </li>
+          <li>
+            <a href="/product">
+              <i class="now-ui-icons shopping_cart-simple"></i>
+              <p>Order</p>
             </a>
           </li>
           <li>

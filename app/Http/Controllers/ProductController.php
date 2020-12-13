@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Profile;
+use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ProfileController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,6 +17,10 @@ class ProfileController extends Controller
     public function index()
     {
         //
+        $products = Product::all();
+        //dd($products);
+        return View('product.index',['products'=>$products]);
+        
     }
 
     /**
@@ -26,7 +31,7 @@ class ProfileController extends Controller
     public function create()
     {
         //
-        return View('profile.createprofile');
+        return View('product.createproduct');
     }
 
     /**
@@ -37,29 +42,27 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        $profile = new Profile();
-        $profile->address = $request->input('address');
-        $profile->phone = $request->input('phone');
-        $profile ->birthday = $request->input('birthday');
-        $profile->user_id = $request->input('userid');
+        //
+        $profile = new Product();
+        //dd($request);
+        $profile->name = $request->input('name');
+        $profile->price = $request->input('price');
+        $profile ->gender = $request->input('gender');
+        $profile->amount = $request->input('amount');
+        $profile->description = $request->input('description');
         // $profile->user_id = $request->input('userId');
         // dd($request->input('id'));
         //$validate = $request->validate(['avatar' => 'nullable|mimes:jpg, jpeg, png, xlx,xls, pdf|max::2048']);
         //print($user->name);
+        //dd($request->file('avatar'));
         $filename = $request->file('avatar')->getClientOriginalName();
         //dd($filename);
-        $filepath = $request->file('avatar')->storeAs('uploads',$filename, 'public');
+        $filepath = $request->file('avatar')->storeAs('uploads/product',$filename, 'public');
         //dd($filepath);
-        $profile->avatar = '/storage/' . $filepath;
-        DB::table('profiles')->insert([
-            'user_id' => $profile->user_id,
-            'address' => $profile->address,
-            'avatar' => $profile->avatar,
-            'birthday' => $profile->birthday,
-            'phone' => $profile->phone
-        ]);
-        return redirect('/user');
+        $profile->pictureURL = '/storage/' . $filepath;
+        $profile->save();
+        return redirect('/product');
+
     }
 
     /**
@@ -70,13 +73,10 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        $profile =  DB::table('profiles')->where('user_id', $id)->first();
-        if(is_null($profile))
-        {
-
-            return View('profile.createprofile', ['id' => $id]);
-        }
-        return View('profile.index', ['profile' => $profile]);
+        //
+        $product = Product::find($id);;
+        // dd($product);
+        return View('product.editproduct', ['product' => $product]);
     }
 
     /**
@@ -87,8 +87,8 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        $profile =  DB::table('profiles')->where('user_id',$id)->first();
-		return View('profile.edit',['profile'=>$profile]);
+        $product = Product::where('id', $id)->get();
+        return View('product.editproduct', ['product' => $product]);
     }
 
     /**
@@ -100,42 +100,36 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
         //
-        $profile = new Profile();
-        $profile->address = $request->input('address');
-        $profile->phone = $request->input('phone');
-        $profile ->birthday = $request->input('birthday');
-        $profile->user_id = $request->input('userid');
+        $product = Product::find($id);
+        
+        //dd($request);
+        $product->name = $request->input('name');
+        $product->price = $request->input('price');
+        $product ->gender = $request->input('gender');
+        $product->amount = $request->input('amount');
+        $product->description = $request->input('description');
         // $profile->user_id = $request->input('userId');
-        //dd($request->input('profileid'));
+        // dd($request->input('id'));
         //$validate = $request->validate(['avatar' => 'nullable|mimes:jpg, jpeg, png, xlx,xls, pdf|max::2048']);
         //print($user->name);
-        if($request->file())
+        //dd($request->file('avatar'));
+        if($request->file("avatar"))
         {
             $filename = $request->file('avatar')->getClientOriginalName();
-            $filepath = $request->file('avatar')->storeAs('uploads',$filename, 'public');
-            $profile->avatar = '/storage/' . $filepath;
+            $filepath = $request->file('avatar')->storeAs('uploads/product',$filename, 'public');
+            $product->pictureURL = '/storage/' . $filepath;
         }
         else
         {
-            $profile->avatar = $request->input("avatar");
-            //dd($request->input('avatar'));
+            $product->pictureURL = $request->input("pictureURL");
         }
         //dd($filename);
-       
+        //dd($request->input("pictureURL"));
         //dd($filepath);
         
-        DB::table('profiles')->where(['id' => $id])->update([
-            'user_id' => $profile->user_id,
-            'address' => $profile->address,
-            'avatar' => $profile->avatar,
-            'birthday' => $profile->birthday,
-            'phone' => $profile->phone
-        ]);
-        return redirect('/user');
-        
-
+        $product->save();
+        return redirect('/product');
     }
 
     /**
@@ -146,9 +140,8 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        //
-        // dd("ok");
-        DB::table('profiles')->where('id', $id)->delete();
+        //dd($id);
+        Product::destroy($id);
         return response()->json([
             'message' => 'Done'
           ]);

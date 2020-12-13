@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Models\Order;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,13 +18,11 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.dashboard');
-});
+Route::get('/', [ProductController::class, 'index']);
 
-Route::get('/dashboard', function () {
-    return view('layouts.dashboard');
-});
+// Route::get('/dashboard', function () {
+//     return view('product.index');
+// });
 
 // Route::get('profile/create/{id}', function($id){
 //     echo $id;
@@ -36,6 +37,11 @@ Route::get('/dashboard', function () {
 Route::resource('user', UserController::class);
 
 Route::resource('profile', ProfileController::class);
+
+Route::resource('product', ProductController::class);
+
+Route::resource('order', Order::class);
+
 
 Route::get('/checkfail', function (){
     echo "checkfail page";
