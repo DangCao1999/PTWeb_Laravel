@@ -5,7 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Models\Order;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +40,7 @@ Route::resource('profile', ProfileController::class);
 
 Route::resource('product', ProductController::class);
 
-Route::resource('order', Order::class);
+Route::resource('order', OrderController::class);
 
 
 Route::get('/checkfail', function (){

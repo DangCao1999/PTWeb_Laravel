@@ -10,13 +10,15 @@ class Order extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id', 'id', 'status'  //các thuộc tính
+        'user_id', 'id', 'status', 'pre-money'  //các thuộc tính
     ];
+
     public function user() {
         return $this->belongsTo('App\User');
         //xác định quan hệ có thể đảo ngược nhau  1 article có thể truy cập đến user, 
         //và ngược lại 1 user cũng có thể truy cập lấy thông tin 1 article
     }
+
     public function products() {
         return $this->belongsToMany('Product');
     }

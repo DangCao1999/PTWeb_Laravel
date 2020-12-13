@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,6 +18,8 @@ class OrderController extends Controller
     public function index()
     {
         //
+        // $orders = Order::join()->Order
+        return View('order.index');
     }
 
     /**
@@ -47,7 +51,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        //$ls = DB::table("product_order")->join("products", "products.id", "=", "product_order.pid") ->where("product_order.oid", "=", $ca)
     }
 
     /**
