@@ -67,11 +67,12 @@
                                 <tbody>
                                     @foreach ($orders as $order)
                                     <tr id="element-{{$order->id}}">
-                                        {{-- <td>
+                                        <td>
                                             {{ $product->pictureURL }}
-                                        </td> --}}
+                                        </td>
                                         <td>
                                             {{ $order->id }}
+
                                         </td>
                                         <td>
                                             {{ $order->pre_money }}
