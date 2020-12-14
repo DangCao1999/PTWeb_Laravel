@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $roleArray = ['admin', 'editor', 'customer'];
+        for($i = 0; $i<3; $i++)
+        {
+            DB::table('roles')->insert(['name'=> $roleArray[$i]]);
+        }
         \App\Models\User::factory(10)->create();
         \App\Models\Product::factory(10)->create();
         \App\Models\Order::factory(20)->create();

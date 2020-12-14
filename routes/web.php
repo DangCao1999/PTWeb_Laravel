@@ -34,7 +34,7 @@ Route::get('/', [ProductController::class, 'index']);
 // });
 
 
-Route::resource('user', UserController::class);
+Route::resource('user', UserController::class)->middleware(['auth', 'role:admin,editor']);
 
 Route::resource('profile', ProfileController::class);
 
@@ -54,3 +54,7 @@ Route::get('checkage/{age?}', function ($age) {
 
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
