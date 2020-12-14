@@ -19,7 +19,7 @@ class OrderController extends Controller
     {
         //
         $orders = Order::all();
-        
+
         return View('order.index',['orders' => $orders]);
     }
 
@@ -53,6 +53,17 @@ class OrderController extends Controller
     public function show($id)
     {
         //$ls = DB::table("product_order")->join("products", "products.id", "=", "product_order.pid") ->where("product_order.oid", "=", $ca)
+
+        $order_detail = DB::table('orders')->leftJoin('order_details', "orders.id" ,"=", "order_details.oid")->where("orders.id","=", $id)->get();
+        //dd($order_detail);
+        //dd($order_detail[0]->user_id);
+        $product = DB::table('order_details')->join('products', 'order_details.pid',"=", "products.id")->where("order_details.oid", "=", $id)->get();
+        //dd($product);
+        $user = DB::table('users')->where('id', "=", $order_detail[0]->user_id)->first();
+
+        //dd($user);
+
+        return view('order.editorder', ['order_detail' => $order_detail, 'user' => $user, 'order_detail' => $order_detail]);
     }
 
     /**

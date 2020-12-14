@@ -73,7 +73,6 @@ class ProfileController extends Controller
         $profile =  DB::table('profiles')->where('user_id', $id)->first();
         if(is_null($profile))
         {
-
             return View('profile.createprofile', ['id' => $id]);
         }
         return View('profile.index', ['profile' => $profile]);
@@ -100,7 +99,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         //
         $profile = new Profile();
         $profile->address = $request->input('address');
@@ -123,9 +122,9 @@ class ProfileController extends Controller
             //dd($request->input('avatar'));
         }
         //dd($filename);
-       
+
         //dd($filepath);
-        
+
         DB::table('profiles')->where(['id' => $id])->update([
             'user_id' => $profile->user_id,
             'address' => $profile->address,
@@ -134,7 +133,7 @@ class ProfileController extends Controller
             'phone' => $profile->phone
         ]);
         return redirect('/user');
-        
+
 
     }
 

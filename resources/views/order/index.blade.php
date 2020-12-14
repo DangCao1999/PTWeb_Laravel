@@ -54,8 +54,6 @@
                                     <th>
                                         Pre-money
                                     </th>
-
-
                                     <th>Status</th>
                                     <th>Create At</th>
                                     <th>
@@ -67,9 +65,9 @@
                                 <tbody>
                                     @foreach ($orders as $order)
                                     <tr id="element-{{$order->id}}">
-                                        <td>
+                                        {{-- <td>
                                             {{ $product->pictureURL }}
-                                        </td>
+                                        </td> --}}
                                         <td>
                                             {{ $order->id }}
 
@@ -77,7 +75,7 @@
                                         <td>
                                             {{ $order->pre_money }}
                                         </td>
-                                        
+
                                         <td>
                                             {{ $order->status }}
                                         </td>
@@ -88,12 +86,12 @@
                                             {{ $order->updated_at }}
                                         </td>
                                         <td>
-                                            <a href="/product/{{$order->id}}" class="btn btn-info btn-fill">View</a>
+                                            <a href="/order/{{$order->id}}" class="btn btn-info btn-fill">View</a>
                                         </td>
                                         <td>
-                                            
+
                                             <button  data-id="{{$order->id}}" id="deleteBtn" class="btn btn-danger btn-fill">Detele</button>
-                                        
+
                                         </td>
                                         {{-- <td>
                                             <input type="password" name="" id="input-{{ $user->id }}"

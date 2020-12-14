@@ -17,11 +17,11 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->string("user_id");
             $table->string("status");
-            $table->string("pre-money");
+            $table->string("pre_money");
             $table->timestamps();
         });
     }
-    
+
     /**
      * Reverse the migrations.
      *
