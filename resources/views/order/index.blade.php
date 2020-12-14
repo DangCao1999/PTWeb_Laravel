@@ -52,20 +52,70 @@
                                         id
                                     </th>
                                     <th>
-                                        Name
+                                        Pre-money
                                     </th>
 
 
-                                    <th>Gender</th>
-                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Create At</th>
                                     <th>
-                                        Unit Price
+                                        Update At
                                     </th>
                                     <th></th>
                                     <th></th>
                                 </thead>
                                 <tbody>
-
+                                    @foreach ($orders as $order)
+                                    <tr id="element-{{$order->id}}">
+                                        {{-- <td>
+                                            {{ $product->pictureURL }}
+                                        </td> --}}
+                                        <td>
+                                            {{ $order->id }}
+                                        </td>
+                                        <td>
+                                            {{ $order->pre_money }}
+                                        </td>
+                                        
+                                        <td>
+                                            {{ $order->status }}
+                                        </td>
+                                        <td>
+                                            {{ $order->created_at }}
+                                        </td>
+                                        <td>
+                                            {{ $order->updated_at }}
+                                        </td>
+                                        <td>
+                                            <a href="/product/{{$order->id}}" class="btn btn-info btn-fill">View</a>
+                                        </td>
+                                        <td>
+                                            
+                                            <button  data-id="{{$order->id}}" id="deleteBtn" class="btn btn-danger btn-fill">Detele</button>
+                                        
+                                        </td>
+                                        {{-- <td>
+                                            <input type="password" name="" id="input-{{ $user->id }}"
+                                                value="{{ $user->password }}">
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-success btn-fill" href="/profile/{{ $user->id }}">View
+                                                Profile</a>
+                                        </td>
+                                        <td>
+                                            <form action="/user/{{ $user->id }}" method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-danger btn-fill" type="submit">Delete
+                                                    User</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-info btn-fill" id="{{ $user->id }}"
+                                                onclick="viewClick(this)">view</button>
+                                        </td> --}}
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

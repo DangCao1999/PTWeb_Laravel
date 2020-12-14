@@ -26,7 +26,7 @@ class OrderFactory extends Factory
         return [
             'user_id' => User::all()->random()->id,//lấy danh sách user rồi chọn ngẫu nhiên id để thêm vào bảng articles
             "status"=> $arrCartStatus[array_rand($arrCartStatus)],
-            // "pre-money" => $this->fake->numberBetween(100000, 1000000),
+            "pre-money" => $this->faker->numberBetween(100000, 1000000),
         ];
     }
 }

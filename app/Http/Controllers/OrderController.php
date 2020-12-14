@@ -18,8 +18,9 @@ class OrderController extends Controller
     public function index()
     {
         //
-        // $orders = Order::join()->Order
-        return View('order.index');
+        $orders = Order::all();
+        
+        return View('order.index',['orders' => $orders]);
     }
 
     /**
