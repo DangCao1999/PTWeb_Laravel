@@ -18,7 +18,10 @@ use App\Http\Controllers\OrderController;
 |
 */
 
-Route::get('/', [ProductController::class, 'index']);
+Route::get('/', function()
+{
+    return view("auth.login");
+});
 
 // Route::get('/dashboard', function () {
 //     return view('product.index');
@@ -57,4 +60,7 @@ Route::get('checkage/{age?}', function ($age) {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home',function()
+{
+ return view('product.index');
+});

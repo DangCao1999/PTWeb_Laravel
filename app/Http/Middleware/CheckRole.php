@@ -21,11 +21,10 @@ class CheckRole
         }
         else
         {
-            for ($i = 0; $i < count($role); $i++) {
-                if (!$request->user()->hasRole($role)) {
-                    //neu
-                    return redirect("dashboard");
-                }
+            if(!$request->user()->hasRole($role))
+            {
+                //neu
+                return redirect("order");
             }
         }
         return $next($request);

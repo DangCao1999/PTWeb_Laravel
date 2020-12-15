@@ -35,7 +35,7 @@
             </li>
         @endforeach
     </ul> --}}
-    @include('product.navproduct')
+    @include('order.navorder')
     <div class="content">
         <div class="row">
             <div class="col-md-12">

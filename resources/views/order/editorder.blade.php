@@ -25,7 +25,7 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label>ID</label>
-                                        <input  name="id" disabled class="form-control"  value="">
+                                        <input  name="id" disabled class="form-control"  value="{{$users->id}}">
                                     </div>
                                 </div>
                             </div>
@@ -33,13 +33,13 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Name</label>
-                                        <input type="text" name="name" class="form-control" placeholder="Name of User"
-                                            value="">
+                                        <input disabled type="text" name="name" class="form-control" placeholder="Name of User"
+                                            value="{{$users->name}}">
                                     </div>
                                 </div>
                             </div>
                             <div style="display: flex; justify-content: flex-end;">
-                                <a href="user/" class="btn btn-primary btn-fill" style="font-size: 15px">Show
+                                <a href="{{route('profile.show', $users->id)}}" class="btn btn-primary btn-fill" style="font-size: 15px">Show
                                 </a>
                             </div>
 
@@ -72,56 +72,31 @@
                                 <th></th>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($orders as $order)
-                                <tr id="element-{{$order->id}}">
+                                @foreach ($products as $product)
+                                <tr id="element-{{$product->id}}">
+                                    <td>
+                                        {{ $product->id }}
 
-                                    <td>
-                                        {{ $order->id }}
-
                                     </td>
                                     <td>
-                                        {{ $order->pre_money }}
-                                    </td>
-
-                                    <td>
-                                        {{ $order->status }}
+                                        {{ $product->name }}
                                     </td>
                                     <td>
-                                        {{ $order->created_at }}
+                                        {{ $product->quantity }}
                                     </td>
                                     <td>
-                                        {{ $order->updated_at }}
-                                    </td>
-                                    <td>
-                                        <a href="/order/{{$order->id}}" class="btn btn-info btn-fill">View</a>
+                                        {{ $product->quantity * $product->price }}
                                     </td>
                                     <td>
 
-                                        <button  data-id="{{$order->id}}" id="deleteBtn" class="btn btn-danger btn-fill">Detele</button>
-
-                                    </td>
-                                    {{-- <td>
-                                        <input type="password" name="" id="input-{{ $user->id }}"
-                                            value="{{ $user->password }}">
+                                        <button  id="deleteBtn" class="btn btn-danger btn-fill">Detele</button>
                                     </td>
                                     <td>
-                                        <a class="btn btn-success btn-fill" href="/profile/{{ $user->id }}">View
+                                        <a class="btn btn-success btn-fill" href="/profile/">View
                                             Profile</a>
                                     </td>
-                                    <td>
-                                        <form action="/user/{{ $user->id }}" method="POST">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-danger btn-fill" type="submit">Delete
-                                                User</button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-info btn-fill" id="{{ $user->id }}"
-                                            onclick="viewClick(this)">view</button>
-                                    </td> --}}
-                               {{-- </tr>
-                                @endforeach --}}
+                               </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
