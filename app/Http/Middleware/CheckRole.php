@@ -24,7 +24,7 @@ class CheckRole
             if(!$request->user()->hasRole($role))
             {
                 //neu
-                return redirect("dashboard");
+                return redirect("order");
             }
         }
         return $next($request);

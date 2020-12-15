@@ -72,56 +72,38 @@
                                 <th></th>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($orders as $order)
-                                <tr id="element-{{$order->id}}">
+                                @foreach ($products as $product)
+                                <tr id="element-{{$product->id}}">
 
                                     <td>
-                                        {{ $order->id }}
+                                        {{ $product->id }}
 
                                     </td>
                                     <td>
-                                        {{ $order->pre_money }}
+                                        {{ $product->name }}
                                     </td>
 
                                     <td>
-                                        {{ $order->status }}
+                                        {{ $product->quantity }}
                                     </td>
                                     <td>
-                                        {{ $order->created_at }}
+                                        {{ $product->quantity * $product->price }}
                                     </td>
-                                    <td>
-                                        {{ $order->updated_at }}
-                                    </td>
-                                    <td>
-                                        <a href="/order/{{$order->id}}" class="btn btn-info btn-fill">View</a>
-                                    </td>
+
+
                                     <td>
 
-                                        <button  data-id="{{$order->id}}" id="deleteBtn" class="btn btn-danger btn-fill">Detele</button>
+                                        <button  id="deleteBtn" class="btn btn-danger btn-fill">Detele</button>
 
                                     </td>
-                                    {{-- <td>
-                                        <input type="password" name="" id="input-{{ $user->id }}"
-                                            value="{{ $user->password }}">
-                                    </td>
+
                                     <td>
-                                        <a class="btn btn-success btn-fill" href="/profile/{{ $user->id }}">View
+                                        <a class="btn btn-success btn-fill" href="/profile/">View
                                             Profile</a>
                                     </td>
-                                    <td>
-                                        <form action="/user/{{ $user->id }}" method="POST">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-danger btn-fill" type="submit">Delete
-                                                User</button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-info btn-fill" id="{{ $user->id }}"
-                                            onclick="viewClick(this)">view</button>
-                                    </td> --}}
-                               {{-- </tr>
-                                @endforeach --}}
+
+                               </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
