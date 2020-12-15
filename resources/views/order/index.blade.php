@@ -1,28 +1,28 @@
 @extends('layouts.app')
 @section('js')
     <script>
-        $("#deleteBtn").on('click', function(e) {
-            console.log("ok");
-            if (!confirm("Do you really want to do this?")) {
-                return false;
-            }
-            e.preventDefault();
-            var id = $(this).data("id");
-            var token = $("meta[name='csrf-token']").attr("content");
-            $.ajax({
-                url: 'product/' + id,
-                type: 'DELETE',
-                data: {
-                    _token: token,
-                },
-                success: function() {
-                    //window.open('http://localhost:8000/product', '_blank');
-                    //console.log("done");
-                    let element = document.getElementById("element-" + id);
-                    element.remove();
-                }
-            });
-        });
+        // $("#deleteBtn").on('click', function(e) {
+        //     console.log("ok");
+        //     if (!confirm("Do you really want to do this?")) {
+        //         return false;
+        //     }
+        //     e.preventDefault();
+        //     var id = $(this).data("id");
+        //     var token = $("meta[name='csrf-token']").attr("content");
+        //     $.ajax({
+        //         url: 'product/' + id,
+        //         type: 'DELETE',
+        //         data: {
+        //             _token: token,
+        //         },
+        //         success: function() {
+        //             //window.open('http://localhost:8000/product', '_blank');
+        //             //console.log("done");
+        //             let element = document.getElementById("element-" + id);
+        //             element.remove();
+        //         }
+        //     });
+        // });
     </script>
 @endsection
 @section('content')
@@ -70,12 +70,10 @@
                                         </td> --}}
                                         <td>
                                             {{ $order->id }}
-
                                         </td>
                                         <td>
                                             {{ $order->pre_money }}
                                         </td>
-
                                         <td>
                                             {{ $order->status }}
                                         </td>
@@ -86,12 +84,10 @@
                                             {{ $order->updated_at }}
                                         </td>
                                         <td>
-                                            <a href="/order/{{$order->id}}" class="btn btn-info btn-fill">View</a>
+                                            <a  href="/order/{{$order->id}}" class="btn btn-info btn-fill">View</a>
                                         </td>
                                         <td>
-
                                             <button  data-id="{{$order->id}}" id="deleteBtn" class="btn btn-danger btn-fill">Detele</button>
-
                                         </td>
                                         {{-- <td>
                                             <input type="password" name="" id="input-{{ $user->id }}"

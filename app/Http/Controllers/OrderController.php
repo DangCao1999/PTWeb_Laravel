@@ -102,10 +102,12 @@ class OrderController extends Controller
         //
     }
 
-    public function deleteProduct($productId)
+    public function deleteProduct($oid, $pid)
     {
-        $rs = DB::table('order_detail')->where('pid', $productId)->delete();
-
+        //dd("$id");
+        $rs = DB::table('order_details')->where('pid', $pid)->where('oid', $oid)->delete();
+        return redirect()->route('order.show', $oid);
+        // $this.show()
     }
 
 }

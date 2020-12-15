@@ -36,6 +36,7 @@ Route::get('/', function()
 //     return view('user.userlist', ['users'=> $users]);
 // });
 
+Route::delete('order/{oid}/product/{pid}', [OrderController::class, "deleteProduct"])->name("order.deleteProduct");
 
 Route::resource('user', UserController::class)->middleware(['auth', 'role:admin,editor']);
 
@@ -45,18 +46,15 @@ Route::resource('product', ProductController::class);
 
 Route::resource('order', OrderController::class);
 
-
 Route::get('/checkfail', function (){
     echo "checkfail page";
     //return view('layouts.dashboard');
 });
+
 Route::get('checkage/{age?}', function ($age) {
     echo $age;
     //return view('layouts.dashboard');
 })->middleware(\App\Http\Middleware\CheckAge::class);
-
-
-
 
 Auth::routes();
 

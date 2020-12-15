@@ -4,7 +4,30 @@
         $("#avatar").on('change', function() {
             var filename = $(this).val();
             $(this).next('.custom-file-label').html(filename);
-        })
+        });
+
+        // $("#deleteBtn").on('click', function(e) {
+        //     console.log("ok");
+        //     if (!confirm("Do you really want to do this?")) {
+        //         return false;
+        //     }
+        //     e.preventDefault();
+        //     var id = $(this).data("id");
+        //     var token = $("meta[name='csrf-token']").attr("content");
+        //     $.ajax({
+        //         url: 'product/' + id,
+        //         type: 'DELETE',
+        //         data: {
+        //             _token: token,
+        //         },
+        //         success: function() {
+        //             //window.open('http://localhost:8000/product', '_blank');
+        //             console.log("done");
+        //             // let element = document.getElementById("element-" + id);
+        //             // element.remove();
+        //         }
+        //     });
+        // });
 
     </script>
 @endsection('js')
@@ -85,15 +108,17 @@
                                         {{ $product->quantity }}
                                     </td>
                                     <td>
-                                        {{ $product->quantity * $product->price }}
+                                        {{ $product->quantity * $product->price }} VNĐ
                                     </td>
                                     <td>
-
-                                        <button  id="deleteBtn" class="btn btn-danger btn-fill">Detele</button>
+                                        <form action="{{route("order.deleteProduct", ["oid" => $order_details[0]->oid, "pid" => $product->id])}}" onsubmit="return ConfirmDelete(this)" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                        <button data-id="{{$product->id}}" id="deleteBtn" class="btn btn-danger btn-fill">Detele</button>
+                                    </form>
                                     </td>
                                     <td>
-                                        <a class="btn btn-success btn-fill" href="/profile/">View
-                                            Profile</a>
+                                        <a class="btn btn-success btn-fill" href="/profile/">View Product</a>
                                     </td>
                                </tr>
                                 @endforeach
