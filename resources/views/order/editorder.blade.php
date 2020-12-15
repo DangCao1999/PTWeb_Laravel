@@ -25,7 +25,7 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label>ID</label>
-                                        <input  name="id" disabled class="form-control"  value="">
+                                        <input  name="id" disabled class="form-control"  value="{{$users->id}}">
                                     </div>
                                 </div>
                             </div>
@@ -33,13 +33,13 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Name</label>
-                                        <input type="text" name="name" class="form-control" placeholder="Name of User"
-                                            value="">
+                                        <input disabled type="text" name="name" class="form-control" placeholder="Name of User"
+                                            value="{{$users->name}}">
                                     </div>
                                 </div>
                             </div>
                             <div style="display: flex; justify-content: flex-end;">
-                                <a href="user/" class="btn btn-primary btn-fill" style="font-size: 15px">Show
+                                <a href="{{route('profile.show', $users->id)}}" class="btn btn-primary btn-fill" style="font-size: 15px">Show
                                 </a>
                             </div>
 
@@ -74,7 +74,6 @@
                             <tbody>
                                 @foreach ($products as $product)
                                 <tr id="element-{{$product->id}}">
-
                                     <td>
                                         {{ $product->id }}
 
@@ -82,26 +81,20 @@
                                     <td>
                                         {{ $product->name }}
                                     </td>
-
                                     <td>
                                         {{ $product->quantity }}
                                     </td>
                                     <td>
                                         {{ $product->quantity * $product->price }}
                                     </td>
-
-
                                     <td>
 
                                         <button  id="deleteBtn" class="btn btn-danger btn-fill">Detele</button>
-
                                     </td>
-
                                     <td>
                                         <a class="btn btn-success btn-fill" href="/profile/">View
                                             Profile</a>
                                     </td>
-
                                </tr>
                                 @endforeach
                             </tbody>

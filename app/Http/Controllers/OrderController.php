@@ -101,4 +101,11 @@ class OrderController extends Controller
     {
         //
     }
+
+    public function deleteProduct($productId)
+    {
+        $rs = DB::table('order_detail')->where('pid', $productId)->delete();
+
+    }
+
 }
