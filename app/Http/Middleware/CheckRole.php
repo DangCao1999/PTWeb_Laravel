@@ -16,15 +16,16 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, $role)
     {
-        if(!$request->user()){
+        if (!$request->user()) {
             return redirect("login");
         }
         else
         {
-            if(!$request->user()->hasRole($role))
-            {
-                //neu
-                return redirect("dashboard");
+            for ($i = 0; $i < count($role); $i++) {
+                if (!$request->user()->hasRole($role)) {
+                    //neu
+                    return redirect("dashboard");
+                }
             }
         }
         return $next($request);
