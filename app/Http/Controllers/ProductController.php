@@ -15,8 +15,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {        //
         $products = Product::all();
         //dd($products);
         return View('product.index',['products'=>$products]);
@@ -29,8 +28,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {       //
         return View('product.createproduct');
     }
 
@@ -62,9 +60,7 @@ class ProductController extends Controller
         $profile->pictureURL = '/storage/' . $filepath;
         $profile->save();
         return redirect('/product');
-
     }
-
     /**
      * Display the specified resource.
      *

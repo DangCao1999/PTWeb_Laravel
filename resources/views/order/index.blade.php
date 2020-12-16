@@ -1,28 +1,32 @@
 @extends('layouts.app')
 @section('js')
     <script>
-        $("#deleteBtn").on('click', function(e) {
-            console.log("ok");
-            if (!confirm("Do you really want to do this?")) {
-                return false;
-            }
-            e.preventDefault();
-            var id = $(this).data("id");
-            var token = $("meta[name='csrf-token']").attr("content");
-            $.ajax({
-                url: 'product/' + id,
-                type: 'DELETE',
-                data: {
-                    _token: token,
-                },
-                success: function() {
-                    //window.open('http://localhost:8000/product', '_blank');
-                    //console.log("done");
-                    let element = document.getElementById("element-" + id);
-                    element.remove();
-                }
-            });
-        });
+        // $("#deleteBtn").on('click', function(e) {
+        //     console.log("ok");
+        //     if (!confirm("Do you really want to do this?")) {
+        //         return false;
+        //     }
+        //     e.preventDefault();
+        //     var id = $(this).data("id");
+        //     var token = $("meta[name='csrf-token']").attr("content");
+        //     $.ajax({
+        //         url: 'product/' + id,
+        //         type: 'DELETE',
+        //         data: {
+        //             _token: token,
+        //         },
+        //         success: function() {
+        //             //window.open('http://localhost:8000/product', '_blank');
+        //             //console.log("done");
+        //             let element = document.getElementById("element-" + id);
+        //             element.remove();
+        //         }
+        //     });
+        // });
+        //$('.datepicker').datepicker();
+//         $(document).ready(function(){
+//     $('#datepicker').timepicker({ timeFormat: 'h:mm:ss p' });
+// });
     </script>
 @endsection
 @section('content')
@@ -42,6 +46,43 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Order Table</h4>
+                        <button class="btn btn-primary btn-fill" data-toggle="modal" data-target="#exampleModalLong">Filter</button>
+                    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{route("order.filter")}}" method="POST">
+            @method('POST')
+            @csrf
+        <div class="form-group">
+
+            <label for="sel1">Select status:</label>
+            <select  class="form-control w-50" id="sel1">
+              <option>received</option>
+              <option>shipping</option>
+              <option>pending</option>
+            </select>
+            <label for="sel1">Select date start:</label>
+            <input type="date" class="datepicker form-control" name="dateStart"  data-provide="datepicker">
+            <label for="sel1">Select date end:</label>
+            <input type="date" class="datepicker form-control" name="dateEnd"  data-provide="datepicker">
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button  type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -70,12 +111,10 @@
                                         </td> --}}
                                         <td>
                                             {{ $order->id }}
-
                                         </td>
                                         <td>
                                             {{ $order->pre_money }}
                                         </td>
-
                                         <td>
                                             {{ $order->status }}
                                         </td>
@@ -86,12 +125,10 @@
                                             {{ $order->updated_at }}
                                         </td>
                                         <td>
-                                            <a href="/order/{{$order->id}}" class="btn btn-info btn-fill">View</a>
+                                            <a  href="/order/{{$order->id}}" class="btn btn-info btn-fill">View</a>
                                         </td>
                                         <td>
-
                                             <button  data-id="{{$order->id}}" id="deleteBtn" class="btn btn-danger btn-fill">Detele</button>
-
                                         </td>
                                         {{-- <td>
                                             <input type="password" name="" id="input-{{ $user->id }}"
