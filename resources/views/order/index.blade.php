@@ -24,9 +24,10 @@
         //     });
         // });
         //$('.datepicker').datepicker();
-//         $(document).ready(function(){
-//     $('#datepicker').timepicker({ timeFormat: 'h:mm:ss p' });
-// });
+        //         $(document).ready(function(){
+        //     $('#datepicker').timepicker({ timeFormat: 'h:mm:ss p' });
+        // });
+
     </script>
 @endsection
 @section('content')
@@ -46,43 +47,53 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Order Table</h4>
-                        <button class="btn btn-primary btn-fill" data-toggle="modal" data-target="#exampleModalLong">Filter</button>
-                    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="{{route("order.filter")}}" method="POST">
-            @method('POST')
-            @csrf
-        <div class="form-group">
-
-            <label for="sel1">Select status:</label>
-            <select  class="form-control w-50" id="sel1">
-              <option>received</option>
-              <option>shipping</option>
-              <option>pending</option>
-            </select>
-            <label for="sel1">Select date start:</label>
-            <input type="date" class="datepicker form-control" name="dateStart"  data-provide="datepicker">
-            <label for="sel1">Select date end:</label>
-            <input type="date" class="datepicker form-control" name="dateEnd"  data-provide="datepicker">
-
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button  type="submit" class="btn btn-primary">Save changes</button>
-      </div>
-    </form>
-    </div>
-  </div>
-</div>
+                        <button class="btn btn-primary btn-fill" data-toggle="modal"
+                            data-target="#exampleModalLong">Filter</button>
+                        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ route('order.filter') }}" method="POST">
+                                            @method('POST')
+                                            @csrf
+                                            <div class="col-md-4">
+                                            <div class="form-group">                                            
+                                                <label class ="form-check-label" for="sel1">Filter with status</label>                                               
+                                                <select class="form-control" name="statusList">
+                                                    <option value="received">Received</option>
+                                                    <option value="shipping">Shipping</option>
+                                                    <option value="pending">Pending</option>
+                                                  </select>       
+                                            </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label for="sel1">Select date start:</label>
+                                                <input type="date" class="datepicker form-control" name="dateStart"
+                                                    data-provide="datepicker">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="sel1">Select date end:</label>
+                                                <input type="date" class="datepicker form-control" name="dateEnd"
+                                                    data-provide="datepicker">
+                                            </div>
+                                        </div>                                 
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -105,52 +116,57 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($orders as $order)
-                                    <tr id="element-{{$order->id}}">
-                                        {{-- <td>
-                                            {{ $product->pictureURL }}
-                                        </td> --}}
-                                        <td>
-                                            {{ $order->id }}
-                                        </td>
-                                        <td>
-                                            {{ $order->pre_money }}
-                                        </td>
-                                        <td>
-                                            {{ $order->status }}
-                                        </td>
-                                        <td>
-                                            {{ $order->created_at }}
-                                        </td>
-                                        <td>
-                                            {{ $order->updated_at }}
-                                        </td>
-                                        <td>
-                                            <a  href="/order/{{$order->id}}" class="btn btn-info btn-fill">View</a>
-                                        </td>
-                                        <td>
-                                            <button  data-id="{{$order->id}}" id="deleteBtn" class="btn btn-danger btn-fill">Detele</button>
-                                        </td>
-                                        {{-- <td>
-                                            <input type="password" name="" id="input-{{ $user->id }}"
-                                                value="{{ $user->password }}">
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-success btn-fill" href="/profile/{{ $user->id }}">View
-                                                Profile</a>
-                                        </td>
-                                        <td>
-                                            <form action="/user/{{ $user->id }}" method="POST">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-danger btn-fill" type="submit">Delete
-                                                    User</button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-info btn-fill" id="{{ $user->id }}"
-                                                onclick="viewClick(this)">view</button>
-                                        </td> --}}
-                                    </tr>
+                                        <tr id="element-{{ $order->id }}">
+                                            {{-- <td>
+                                                {{ $product->pictureURL }}
+                                            </td> --}}
+                                            <td>
+                                                {{ $order->id }}
+                                            </td>
+                                            <td>
+                                                {{ $order->pre_money }}
+                                            </td>
+                                            <td>
+                                                {{ $order->status }}
+                                            </td>
+                                            <td>
+                                                {{ $order->created_at }}
+                                            </td>
+                                            <td>
+                                                {{ $order->updated_at }}
+                                            </td>
+                                            <td>
+                                                <a href="/order/{{ $order->id }}" class="btn btn-info btn-fill">View</a>
+                                            </td>
+                                            <td>
+                                                <form action="/order/{{ $order->id }}" method="post">
+                                                    @method("DELETE")
+                                                    @csrf
+                                                    <button type="submit" data-id="{{ $order->id }}" id="deleteBtn"
+                                                        class="btn btn-danger btn-fill">Detele</button>
+                                                </form>
+                                            </td>
+                                            {{-- <td>
+                                                <input type="password" name="" id="input-{{ $user->id }}"
+                                                    value="{{ $user->password }}">
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-success btn-fill" href="/profile/{{ $user->id }}">View
+                                                    Profile</a>
+                                            </td>
+                                            <td>
+                                                <form action="/user/{{ $user->id }}" method="POST">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button class="btn btn-danger btn-fill" type="submit">Delete
+                                                        User</button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-info btn-fill" id="{{ $user->id }}"
+                                                    onclick="viewClick(this)">view</button>
+                                            </td> --}}
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>

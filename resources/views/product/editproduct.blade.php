@@ -47,12 +47,11 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Gender</label>
-                                        <input name="gender" type="text" list="genders" value="{{$product->gender}}" class="form-control">
-                                        <datalist id="genders">
-                                            <option> Male
-                                            <option> Female
-                                            <option> Both
-                                        </datalist>
+                                        <select class="form-control" name="gender">
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Both">Both</option>
+                                          </select>
 
                                     </div>
                                 </div>

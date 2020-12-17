@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class OrderController extends Controller
 {
@@ -100,18 +101,24 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+        //delete in table order
+        DB::table('orders')->where('id', $id)->delete();
+        DB::table('order_details')->where('oid', $id)->delete();
+        return redirect()->route('order.index');
     }
 
     public function deleteProduct($oid, $pid)
     {
         //dd("$id");
         $rs = DB::table('order_details')->where('pid', $pid)->where('oid', $oid)->delete();
+        Alert::success('Delete Success');
         return redirect()->route('order.show', $oid);
         // $this.show()
     }
 
     public function filter(Request $request)
     {
+        
         $order = Order::query();
         if($request->input("dateStart") != null && $request->input('dateEnd') != null){
            $dateStart = $request->input('dateStart');
@@ -119,10 +126,18 @@ class OrderController extends Controller
            //dd($dateStart);
            $order->where('created_at', '>', $dateStart);
            $order->where('created_at', '<', $dateEnd);
-           $order = $order->get();
+           
            //dd($order);
-           return redirect()->route('order.index', ['orders'=>$order]);
+           
         }
+        if($request->input("statusList"))
+        {
+            $order->where('status', '=', $request->input('statusList'));
+        }
+        $order = $order->get();
+        //dd($order);
+        Alert::success('Filter Done', 'Click ok to continue');
+        return view('order.index', ['orders' => $order]);
     }
 
 }
