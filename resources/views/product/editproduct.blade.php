@@ -48,9 +48,9 @@
                                     <div class="form-group">
                                         <label>Gender</label>
                                         <select class="form-control" name="gender">
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                            <option value="Both">Both</option>
+                                            <option @if($product->gender == 'male') {{'selected'}} @endif value="male">male</option>
+                                            <option @if($product->gender == 'female') {{'selected'}} @endif value="female">female</option>
+                                            <option @if($product->gender == 'both') {{'selected'}} @endif value="both">both</option>
                                           </select>
 
                                     </div>

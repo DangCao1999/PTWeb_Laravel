@@ -128,7 +128,15 @@
                                                 {{ $order->pre_money }}
                                             </td>
                                             <td>
-                                                {{ $order->status }}
+                                                <form action="{{route('order.update', $order->id)}}" id="updateStatusForm" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                <select name="statusList" class="form-control" name="gender">
+                                                    <option @if($order->status == 'received') {{ 'selected' }} @endif>Received</option>
+                                                    <option @if($order->status == 'shipping') {{ 'selected' }} @endif value="Female">Shipping</option>
+                                                    <option @if($order->status == 'pending') {{ 'selected' }} @endif value="Both">Pending</option>
+                                                  </select>
+                                                </form>
                                             </td>
                                             <td>
                                                 {{ $order->created_at }}
@@ -137,12 +145,8 @@
                                                 {{ $order->updated_at }}
                                             </td>
                                             <td>
-                                                <form action="/order/{{ $order->id }}" onsubmit="if(!confirm('Are You Sure?')){return false;}" method="post">
-                                                    @method("PUT")
-                                                    @csrf
-                                                    <button type="submit" data-id="{{ $order->id }}" id="updateBtn"
-                                                        class="btn btn-success btn-fill">Update Status</button>
-                                                </form>
+                                                    <button type="submit" form="updateStatusForm" id="updateBtn"
+                                                        class="btn btn-success btn-fill">Update Status</button>                                                
                                             </td>
                                             <td>
                                                  

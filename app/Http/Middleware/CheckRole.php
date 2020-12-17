@@ -14,18 +14,18 @@ class CheckRole
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, $role)
+    public function handle(Request $request, Closure $next, ...$roles)
     {
         if (!$request->user()) {
             return redirect("login");
         }
         else
         {
-            if(!$request->user()->hasRole($role))
-            {
-                //neu
-                return redirect("order");
-            }
+            foreach ($roles as $role){
+                if ($request->user()->hasRole($role)){
+                    
+                    return $next($request);
+                }}
         }
         return $next($request);
     }

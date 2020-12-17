@@ -38,13 +38,13 @@ Route::get('/', function()
 
 Route::delete('order/{oid}/product/{pid}', [OrderController::class, "deleteProduct"])->name("order.deleteProduct");
 
-Route::resource('user', UserController::class)->middleware(['auth', 'role:admin,editor']);
+Route::resource('user', UserController::class)->middleware(['auth', 'role:admin']);
 
 Route::resource('profile', ProfileController::class);
 
-Route::resource('product', ProductController::class);
+Route::resource('product', ProductController::class)->middleware(['auth', 'role:admin,editor']);
 
-Route::resource('order', OrderController::class);
+Route::resource('order', OrderController::class)->middleware(['auth', 'role:admin,editor']);
 
 Route::get('/checkfail', function (){
     echo "checkfail page";
@@ -52,6 +52,7 @@ Route::get('/checkfail', function (){
 });
 
 Route::post('/order/filter', [OrderController::class, 'filter'])->name('order.filter');
+
 Route::get('checkage/{age?}', function ($age) {
     echo $age;
     //return view('layouts.dashboard');

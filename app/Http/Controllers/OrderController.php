@@ -65,7 +65,7 @@ class OrderController extends Controller
         $user = DB::table('users')->where('id', "=", $order_detail[0]->user_id)->first();
 
         //dd($user);
-
+        
         return view('order.editorder', ['order_details' => $order_detail, 'users' => $user, 'products' => $product]);
     }
 
@@ -90,10 +90,11 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         //
+            
             $newstatus = $request->input("statusList");
             DB::table('orders')->where('id', $id)->update(['status' => $newstatus]);
             toast('Update Success', 'success', 'top-right')->showCloseButton();
-            //return redirect()->route('order.show')
+            return redirect()->route('order.index');
     }
 
     /**
