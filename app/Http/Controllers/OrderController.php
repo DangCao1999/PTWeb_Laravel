@@ -90,6 +90,10 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         //
+            $newstatus = $request->input("statusList");
+            DB::table('orders')->where('id', $id)->update(['status' => $newstatus]);
+            toast('Update Success', 'success', 'top-right')->showCloseButton();
+            //return redirect()->route('order.show')
     }
 
     /**
@@ -104,6 +108,7 @@ class OrderController extends Controller
         //delete in table order
         DB::table('orders')->where('id', $id)->delete();
         DB::table('order_details')->where('oid', $id)->delete();
+        toast('Delete Success','success','top-right')->autoClose(2000)->showCloseButton();
         return redirect()->route('order.index');
     }
 
@@ -114,6 +119,8 @@ class OrderController extends Controller
         //Alert::success('Delete Success');
         //$temp = Alert::alert()->success('SuccessAlert','Lorem ipsum dolor sit amet.')->showConfirmButton('Confirm', '#3085d6');
         // dd($temp);
+        //Alert::success('Filter Done', 'Click ok to continue');
+        toast('Delete Success','success','top-right')->showCloseButton();
         return redirect()->route('order.show', $oid);
         // $this.show()
     }

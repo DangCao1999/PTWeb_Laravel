@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProfileController extends Controller
 {
@@ -59,6 +60,7 @@ class ProfileController extends Controller
             'birthday' => $profile->birthday,
             'phone' => $profile->phone
         ]);
+        toast('Data Saved','success','top-right')->autoClose(2000)->showCloseButton();
         return redirect('/user');
     }
 
@@ -132,6 +134,7 @@ class ProfileController extends Controller
             'birthday' => $profile->birthday,
             'phone' => $profile->phone
         ]);
+        toast('Update Success','success','top-right')->autoClose(2000)->showCloseButton();
         return redirect('/user');
 
 
@@ -148,6 +151,7 @@ class ProfileController extends Controller
         //
         // dd("ok");
         DB::table('profiles')->where('id', $id)->delete();
+        toast('Delete Success','success','top-right')->autoClose(2000)->showCloseButton();
         return response()->json([
             'message' => 'Done'
           ]);

@@ -19,9 +19,9 @@ class DatabaseSeeder extends Seeder
         {
             DB::table('roles')->insert(['name'=> $roleArray[$i]]);
         }
-        \App\Models\User::factory(1)->create();
-        \App\Models\Product::factory(1)->create();
-        \App\Models\Order::factory(1)->create();
-        \App\Models\OrderDetail::factory(50)->create();
+        \App\Models\User::factory(10)->create();
+        \App\Models\Product::factory(10)->create();
+        \App\Models\Order::factory(10)->create();
+        \App\Models\OrderDetail::factory(100)->create();
     }
 }

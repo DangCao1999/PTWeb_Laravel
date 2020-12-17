@@ -113,6 +113,7 @@
                                     </th>
                                     <th></th>
                                     <th></th>
+                                    <th></th>
                                 </thead>
                                 <tbody>
                                     @foreach ($orders as $order)
@@ -136,10 +137,18 @@
                                                 {{ $order->updated_at }}
                                             </td>
                                             <td>
+                                                <form action="/order/{{ $order->id }}" onsubmit="if(!confirm('Are You Sure?')){return false;}" method="post">
+                                                    @method("PUT")
+                                                    @csrf
+                                                    <button type="submit" data-id="{{ $order->id }}" id="updateBtn"
+                                                        class="btn btn-success btn-fill">Update Status</button>
+                                                </form>
+                                            </td>
+                                            <td>
                                                 <a href="/order/{{ $order->id }}" class="btn btn-info btn-fill">View</a>
                                             </td>
                                             <td>
-                                                <form action="/order/{{ $order->id }}" method="post">
+                                                <form action="/order/{{ $order->id }}" onsubmit="if(!confirm('Are You Sure?')){return false;}" method="post">
                                                     @method("DELETE")
                                                     @csrf
                                                     <button type="submit" data-id="{{ $order->id }}" id="deleteBtn"

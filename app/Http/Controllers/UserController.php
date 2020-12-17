@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Facade\FlareClient\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     /**
@@ -41,14 +42,18 @@ class UserController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = $request->input('password');
+        $user->role_id = $request->input('role');
+        //dd($user);
         // print($user->name);
         $affected = DB::table('users')->insert(
             [
                 "name" => $user->name,
                 "email" => $user->email,
-                "password" => $user->password,
+                "password" => Hash::make($user->password),
+                "role_id" =>  $user->role_id,
             ]
         );
+        toast('Update Success','success','top-right')->autoClose(2000)->showCloseButton();
         return redirect('/user');
     }
 
@@ -98,6 +103,7 @@ class UserController extends Controller
         //dd("aaa");
         DB::table('users')->where('id', $id)->delete();
         DB::table('profiles')->where('user_id', $id)->delete();
+        toast('Delete Success','success','top-right')->autoClose(2000)->showCloseButton();
         return redirect('/user');
     }
 }

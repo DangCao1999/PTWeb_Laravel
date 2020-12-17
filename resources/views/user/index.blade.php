@@ -61,7 +61,7 @@
                                       <a class="btn btn-success btn-fill" href="/profile/{{$user->id}}">View Profile</a>
 									  </td>
                                       <td>
-									  <form action="/user/{{$user->id}}" method="POST">
+									  <form action="/user/{{$user->id}}" onsubmit="if(!confirm('Are You Sure?')){return false;}" method="POST">
 											@csrf 
 											@method('delete')	
                                             <button  class="btn btn-danger btn-fill" type="submit">Delete User</button>

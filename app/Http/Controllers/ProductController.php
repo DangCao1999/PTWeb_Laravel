@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductController extends Controller
 {
@@ -59,6 +60,7 @@ class ProductController extends Controller
         //dd($filepath);
         $profile->pictureURL = '/storage/' . $filepath;
         $profile->save();
+        toast('Data Saved','success','top-right')->autoClose(2000)->showCloseButton();
         return redirect('/product');
     }
     /**
@@ -125,6 +127,7 @@ class ProductController extends Controller
         //dd($filepath);
         
         $product->save();
+        toast('Update Success','success','top-right')->autoClose(2000)->showCloseButton();
         return redirect('/product');
     }
 
@@ -138,6 +141,7 @@ class ProductController extends Controller
     {
         //dd($id);
         Product::destroy($id);
+        toast('Delete Success','success','top-right')->autoClose(2000)->showCloseButton();
         return response()->json([
             'message' => 'Done'
           ]);
