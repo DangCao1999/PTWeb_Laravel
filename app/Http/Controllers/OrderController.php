@@ -111,14 +111,16 @@ class OrderController extends Controller
     {
         //dd("$id");
         $rs = DB::table('order_details')->where('pid', $pid)->where('oid', $oid)->delete();
-        Alert::success('Delete Success');
+        //Alert::success('Delete Success');
+        //$temp = Alert::alert()->success('SuccessAlert','Lorem ipsum dolor sit amet.')->showConfirmButton('Confirm', '#3085d6');
+        // dd($temp);
         return redirect()->route('order.show', $oid);
         // $this.show()
     }
 
     public function filter(Request $request)
     {
-        
+
         $order = Order::query();
         if($request->input("dateStart") != null && $request->input('dateEnd') != null){
            $dateStart = $request->input('dateStart');
@@ -126,9 +128,9 @@ class OrderController extends Controller
            //dd($dateStart);
            $order->where('created_at', '>', $dateStart);
            $order->where('created_at', '<', $dateEnd);
-           
+
            //dd($order);
-           
+
         }
         if($request->input("statusList"))
         {

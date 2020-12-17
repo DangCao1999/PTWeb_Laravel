@@ -111,7 +111,7 @@
                                         {{ $product->quantity * $product->price }} VNĐ
                                     </td>
                                     <td>
-                                        <form action="{{route("order.deleteProduct", ["oid" => $order_details[0]->oid, "pid" => $product->id])}}" onsubmit="if(!confirm('Is the form filled out correctly?')){return false;}" method="POST">
+                                        <form action="{{route("order.deleteProduct", ["oid" => $order_details[0]->oid, "pid" => $product->id])}}" onsubmit="if(!confirm('Are You Sure?')){return false;}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                         <button data-id="{{$product->id}}" id="deleteBtn" class="btn btn-danger btn-fill">Detele</button>
