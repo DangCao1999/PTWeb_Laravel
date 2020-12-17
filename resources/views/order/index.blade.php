@@ -145,7 +145,9 @@
                                                 </form>
                                             </td>
                                             <td>
-                                                <a href="/order/{{ $order->id }}" class="btn btn-info btn-fill">View</a>
+                                                 
+                                                <a href="/order/{{ $order->id }}" class="btn btn-info btn-fill">
+                                                    View</a>
                                             </td>
                                             <td>
                                                 <form action="/order/{{ $order->id }}" onsubmit="if(!confirm('Are You Sure?')){return false;}" method="post">
